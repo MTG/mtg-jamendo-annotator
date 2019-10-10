@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    input[type='radio'] { transform: scale(1.5); }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js"></script>
+  <script>
+    $(function () {
+      // collect and submit answers features
+      function get_answers() {
+//        TODO
+//        var elements = $('input[name=radAnswer]:checked');
+//        var answers = {};
+//        elements.each(function (idx, el) {
+//          answers[$(el).parents('div').attr('id')] = $(el).val();
+//        });
+        var answers = 'TODO';
+        return answers
+      }
+
+      function send_answers() {
+        var answers = get_answers();
+        var data = {
+          answers: answers,
+          page: '{{page}}'
+        };
+        
+        $.ajax({
+            url: '/',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data);
+                window.location.replace("/?p={{page+1}}");
+            },
+            data: JSON.stringify(data)
+        });
+      }
+
+      $('#submit-button').click(function() {
+        send_answers();
+      });
+    
+
+      // player stuff
+      var wavesurfers = [];
+      $(".waveform").each(function(){
+        // create wavesurfer element
+        var track_name = $(this).attr('track-name');
+        var wavesurfer = WaveSurfer.create({
+          container: this,
+          waveColor: 'violet',
+          progressColor: 'purple'
+        });
+
+        // add play pause feature
+        var play_pause_button = $(this).parent().children('.playPause');
+        play_pause_button.on('click', function() {
+          wavesurfer.playPause();
+        });
+
+        // Toggle play/pause text
+        wavesurfer.on('play', function() {
+          play_pause_button.find('.play').css("display", "none");
+          play_pause_button.find('.pause').css("display", "");
+        });
+        wavesurfer.on('pause', function() {
+          play_pause_button.find('.play').css("display", "");
+          play_pause_button.find('.pause').css("display", "none");
+        });
+
+        // load track
+        wavesurfer.load(track_name);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Listen to the tracks and annotate them!</h1>
+  <h2>You are in page #{{page}}</h2>
+
+  <div id="sound-container">
+
+    <!-- iterate through each sound track -->
+    {% for sound_track in sound_tracks %}
+
+      <!-- player -->
+      <div style="border-style:solid; border-color:gray; width:600px;" id="{{sound_track}}">
+        <div class="player-container">
+          <div class="waveform" track-name="{{sound_track}}"></div>
+          <button class="playPause">
+            <span class="play">
+              Play
+            </span>
+            <span class="pause" style="display: none">
+              Pause
+            </span>
+          </button>
+        </div>
+        <br>
+
+        <!-- form -->
+        <form style="display:inline-block;" action="" id="form-{{sound_track}}">
+          <input type="radio" name="radAnswer" value="1" checked="1"> Sad<br>
+          <input type="radio" name="radAnswer" value="0"> Not Sad<br>
+        </form>
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <br>
+  <button id="submit-button" style="margin-left:100px; width:150px; height: 100px;">submit</button>
+  <br>
+
+</body>
+
+</html>
