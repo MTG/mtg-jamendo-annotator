@@ -11,6 +11,6 @@ Start server:
 `python app.py`
 
 With your browser go to:
-`http://localhost:5000/?p=1`
+`http://localhost:5000/`
 
-Annotate and submit your answers.
+Choose a task and start annotating!
