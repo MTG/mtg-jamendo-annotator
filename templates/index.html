@@ -29,13 +29,13 @@
         };
         
         $.ajax({
-            url: '/',
+            url: '{{ url_for('annotator', annotation_task=annotation_task) }}',
             type: 'post',
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
                 console.log(data);
-                window.location.replace("/?p={{page+1}}");
+                window.location.replace("{{ url_for('annotator', annotation_task=annotation_task) }}"+ "?p={{page+1}}");
             },
             data: JSON.stringify(data)
         });
@@ -81,7 +81,7 @@
 </head>
 
 <body>
-  <h1>Listen to the tracks and annotate them!</h1>
+  <h1>Task: {{annotation_task}}</h1>
   <h2>You are in page #{{page}}</h2>
 
   <div id="sound-container">
