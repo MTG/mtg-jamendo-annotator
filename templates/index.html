@@ -105,10 +105,7 @@
         <br>
 
         <!-- form -->
-        <form style="display:inline-block;" action="" id="form-{{sound_track}}">
-          <input type="radio" name="radAnswer" value="1" checked="1"> Sad<br>
-          <input type="radio" name="radAnswer" value="0"> Not Sad<br>
-        </form>
+        {% include annotation_task + '.html' %}
 
       </div>
     {% endfor %}
