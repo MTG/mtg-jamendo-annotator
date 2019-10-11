@@ -63,7 +63,6 @@
     
 
       // player stuff
-      var wavesurfers = [];
       $(".waveform").each(function(){
         // create wavesurfer element
         var track_name = $(this).attr('track-name');
@@ -71,7 +70,8 @@
           container: this,
           waveColor: 'black',
           progressColor: 'grey',
-          barWidth: '1'
+          barWidth: '1',
+          backend: 'MediaElement'
         });
 
         // add play pause feature
