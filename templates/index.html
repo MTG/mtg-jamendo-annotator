@@ -35,12 +35,13 @@
           var key = $(el).attr('name');
           var obj = {};
           obj[key] = $(el).val();
+          var track_name = $(el).parents('.track-container').attr('id');
 
-          if (answers[$(el).parents('.track-container').attr('id')]) 
+          if (answers[track_name]) 
             {
-              answers[$(el).parents('.track-container').attr('id')].push(obj);
+              answers[track_name].push(obj);
             } else {
-              answers[$(el).parents('.track-container').attr('id')] = [obj];
+              answers[track_name] = [obj];
             }
         });
 
@@ -50,12 +51,13 @@
           var key = $(el).parents('.box').attr('taxonomy');
           var obj = {};
           obj[key] = $(el).val();
+          var track_name = $(el).parents('.track-container').attr('id');
 
-          if (answers[$(el).parents('.track-container').attr('id')]) 
+          if (answers[track_name]) 
             {
-              answers[$(el).parents('.track-container').attr('id')].push(obj);
+              answers[track_name].push(obj);
             } else {
-              answers[$(el).parents('.track-container').attr('id')] = [obj];
+              answers[track_name] = [obj];
             }
         });
         
