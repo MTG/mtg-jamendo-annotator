@@ -27,8 +27,10 @@
     $(function () {
       // collect and submit answers features
       function get_answers() {
-        var elements = $('.box').find('input:checked');
         var answers = {};
+
+        // radio inputs
+        var elements = $('.box').find('input:checked');
         elements.each(function (idx, el) {
           var key = $(el).attr('name');
           var obj = {};
@@ -41,6 +43,22 @@
               answers[$(el).parents('.track-container').attr('id')] = [obj];
             }
         });
+
+        // dropdowns
+        var elements = $('.box').find("option:selected");
+        elements.each(function (idx, el) {
+          var key = $(el).parents('.box').attr('taxonomy');
+          var obj = {};
+          obj[key] = $(el).val();
+
+          if (answers[$(el).parents('.track-container').attr('id')]) 
+            {
+              answers[$(el).parents('.track-container').attr('id')].push(obj);
+            } else {
+              answers[$(el).parents('.track-container').attr('id')] = [obj];
+            }
+        });
+        
         return answers
       }
 
