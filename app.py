@@ -11,6 +11,7 @@ NUM_SOUNDS_PER_PAGE = 5
 # Enter here the path to the file containing the path of the sound track you have to annotate.
 # e.g. 'static/track_paths.json'
 PATH_TO_FILE_WITH_SOUND_IDS = 'static/example_track_paths.json'
+FOLDER_WITH_AUDIO_FILES = 'static/'
 
 # There are three different annotation tasks
 ANNOTATION_TASKS = [
@@ -33,9 +34,10 @@ def annotator(annotation_task):
     if request.method == 'POST':
         # save annotations to json file
         data = request.get_json()
-        print(data)
-        # TODO: save data in on json per audio track and per annotation task
-        # json.dump(data['answers'], open('annotations/page-{}.json'.format(data['page']), 'w'))
+        page = data['page']
+        for track_name, answers in data['answers'].items():
+            print(track_name, answers)
+            json.dump(answers, open('annotations/page-{}-{}.json'.format(page, track_name), 'w'))
         return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
     page = int(request.args.get('p', 1))
@@ -45,7 +47,11 @@ def annotator(annotation_task):
     # get a chunk of sound tracks according to the requested page number
     sound_tracks = all_sound_tracks[(page-1)*NUM_SOUNDS_PER_PAGE:page*NUM_SOUNDS_PER_PAGE]
 
-    return render_template("index.html", sound_tracks=sound_tracks, page=page, annotation_task=annotation_task)
+    return render_template("index.html", 
+                           folder_with_audio_files=FOLDER_WITH_AUDIO_FILES, 
+                           sound_tracks=sound_tracks, 
+                           page=page, 
+                           annotation_task=annotation_task)
 
 
 if __name__ == '__main__':

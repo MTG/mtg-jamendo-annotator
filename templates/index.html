@@ -30,11 +30,15 @@
         var elements = $('.box').find('input:checked');
         var answers = {};
         elements.each(function (idx, el) {
+          var key = $(el).attr('name');
+          var obj = {};
+          obj[key] = $(el).val();
+
           if (answers[$(el).parents('.track-container').attr('id')]) 
             {
-              answers[$(el).parents('.track-container').attr('id')].push($(el).attr('name'));
+              answers[$(el).parents('.track-container').attr('id')].push(obj);
             } else {
-              answers[$(el).parents('.track-container').attr('id')] = [$(el).attr('name')];
+              answers[$(el).parents('.track-container').attr('id')] = [obj];
             }
         });
         return answers
@@ -68,7 +72,7 @@
       // player stuff
       $(".waveform").each(function(){
         // create wavesurfer element
-        var track_name = $(this).attr('track-name');
+        var track_name = $(this).attr('track-path');
         var wavesurfer = WaveSurfer.create({
           container: this,
           waveColor: 'black',
@@ -112,7 +116,7 @@
       <!-- player -->
       <div class="track-container" style="border-style:solid; border-color:gray; width:1000px;" id="{{sound_track}}">
         <div class="player-container">
-          <div class="waveform" track-name="{{sound_track}}"></div>
+          <div class="waveform" track-path="{{folder_with_audio_files + sound_track}}"></div>
           <button class="playPause">
             <span class="play">
               Play
