@@ -27,13 +27,16 @@
     $(function () {
       // collect and submit answers features
       function get_answers() {
-//        TODO
-//        var elements = $('input[name=radAnswer]:checked');
-//        var answers = {};
-//        elements.each(function (idx, el) {
-//          answers[$(el).parents('div').attr('id')] = $(el).val();
-//        });
-        var answers = 'TODO';
+        var elements = $('.box').find('input:checked');
+        var answers = {};
+        elements.each(function (idx, el) {
+          if (answers[$(el).parents('.track-container').attr('id')]) 
+            {
+              answers[$(el).parents('.track-container').attr('id')].push($(el).attr('name'));
+            } else {
+              answers[$(el).parents('.track-container').attr('id')] = [$(el).attr('name')];
+            }
+        });
         return answers
       }
 
@@ -107,7 +110,7 @@
     {% for sound_track in sound_tracks %}
 
       <!-- player -->
-      <div style="border-style:solid; border-color:gray; width:1000px;" id="{{sound_track}}">
+      <div class="track-container" style="border-style:solid; border-color:gray; width:1000px;" id="{{sound_track}}">
         <div class="player-container">
           <div class="waveform" track-name="{{sound_track}}"></div>
           <button class="playPause">
