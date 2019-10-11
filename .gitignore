@@ -1,6 +1,11 @@
 annotations/*
 !annotations/.keep
 
+static/tracks/*
+!static/tracks/.keep
+
+ja_env/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
