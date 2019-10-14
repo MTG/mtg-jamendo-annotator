@@ -1,6 +1,6 @@
 # The MTG-Jamendo-Annotator
 
-## Insall dependencies
+## Install dependencies
 ```shell
 virtualenv venv
 source venv/bin/activate
