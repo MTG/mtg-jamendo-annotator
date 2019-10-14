@@ -10,7 +10,7 @@ NUM_SOUNDS_PER_PAGE = 5
 
 # Enter here the path to the file containing the path of the sound track you have to annotate.
 # e.g. 'static/track_paths.json'
-PATH_TO_FILE_WITH_SOUND_IDS = 'static/example_track_paths.json'
+PATH_TO_FILE_WITH_SOUND_IDS = 'static/stratified_test_elements_fold_0.json'
 FOLDER_WITH_AUDIO_FILES = 'static/tracks/'
 
 # There are three different annotation tasks
@@ -37,8 +37,9 @@ def annotator(annotation_task):
         page = data['page']
         for track_name, answers in data['answers'].items():
             print(track_name, answers)
-            json.dump(answers, open('annotations/{}-page-{}-{}.json'.format(annotation_task, page, track_name), 'w'))
-        return json.dumps({'success':True}), 200, {'ContentType': 'application/json'} 
+            track_name_without_folder = track_name.replace('/', '-')
+            json.dump(answers, open('annotations/{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder), 'w'))
+        return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
     page = int(request.args.get('p', 1))
 
