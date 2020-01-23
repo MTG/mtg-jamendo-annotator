@@ -75,14 +75,26 @@ def annotator(annotation_task):
         page = data['page']
         for track_name, answers in data['answers'].items():
             print(track_name, answers)
-            track_name_without_folder = track_name.replace('/', '-')
+            track_name_without_folder = track_name.replace('/', '_')
 
             annotation_file = '{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder)
             with open(os.path.join(ANNOTATION_FOLDER, annotation_file), 'w') as fp:
                 json.dump(answers, fp)
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
-    page = int(request.args.get('p', 1))
+    page = request.args.get('p', None)
+
+    # check completion
+    annotation_files = [file for file in os.listdir('annotations') if file.endswith('.json')]
+
+    # set page automaticaly according to their completion
+    if not page:
+        if annotation_files:
+            page = max([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files]) + 1
+        else:
+            page = 1
+    else:
+        page = int(page)
 
     all_sound_tracks = json.load(open(PATH_TO_FILE_WITH_SOUND_IDS, 'rb'))
 
