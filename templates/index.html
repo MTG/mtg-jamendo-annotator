@@ -127,6 +127,12 @@
 <body>
   <h1>Task: {{annotation_task}}</h1>
   <h2>You are on page #{{page}}</h2>
+  {% if page_already_annotated %}
+    <h3 style="color:red">
+      You already annotated this page.
+      Submiting new annotations will overwrite previous submited ones.
+    </h3>
+  {% endif %}
 
   <div id="sound-container">
 

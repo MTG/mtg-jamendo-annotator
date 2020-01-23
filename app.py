@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, redirect, url_for
 import json
 import os
 
@@ -59,6 +59,17 @@ except ValueError:
     raise ValueError("{} is not a valid number of sounds per page".format(CONFIG_SOUNDS_PER_PAGE))
 
 
+def find_missing_integer(lst):
+    """Returns the first missing integer in an ordered list.
+    If not found, returns the next integer.
+    """
+    try:
+        return sorted(set(range(lst[0], lst[-1])) - set(lst))[0]
+    except:
+        return max(lst) + 1
+
+
+
 @app.route('/')
 def home():
     return render_template("home.html", annotation_tasks=ANNOTATION_TASKS)
@@ -83,18 +94,26 @@ def annotator(annotation_task):
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
     page = request.args.get('p', None)
+    page_already_annotated = False
 
     # check completion
     annotation_files = [file for file in os.listdir('annotations') if file.endswith('.json')]
+    annotated_pages_set = set([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files])
+    annotated_pages = sorted(list(annotated_pages_set))
 
     # set page automaticaly according to their completion
     if not page:
         if annotation_files:
-            page = max([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files]) + 1
+            redirect_page = find_missing_integer(annotated_pages)
         else:
-            page = 1
+            redirect_page = 1
+        return redirect(url_for('annotator', annotation_task=annotation_task, p=redirect_page))
+
     else:
+        # check if page was already annotated
         page = int(page)
+        if page in annotated_pages_set:
+            page_already_annotated = True
 
     all_sound_tracks = json.load(open(PATH_TO_FILE_WITH_SOUND_IDS, 'rb'))
 
@@ -105,7 +124,8 @@ def annotator(annotation_task):
                            folder_with_audio_files=FOLDER_WITH_AUDIO_FILES,
                            sound_tracks=sound_tracks,
                            page=page,
-                           annotation_task=annotation_task)
+                           annotation_task=annotation_task,
+                           page_already_annotated=page_already_annotated)
 
 
 if __name__ == '__main__':
