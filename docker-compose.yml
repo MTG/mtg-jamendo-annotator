@@ -4,7 +4,13 @@ services:
   app:
     build: .
     command: flask run --host=0.0.0.0
+    environment:
+      - SOUNDS_PER_PAGE=10
+      - ANNOTATION_TASKS=mood,miscellaneous
+      - CHUNK_NUMBER=0
     ports:
       - "5000:5000"
+    stop_signal: SIGINT
     volumes:
-    - /Users/alastair/code/amplab/jamendo-dataset/audio-folds/0:/app/static/tracks
+      - .:/app
+      - /Users/alastair/code/amplab/jamendo-dataset/audio-folds/0:/app/static/tracks

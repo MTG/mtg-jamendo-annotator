@@ -14,25 +14,49 @@
 
 from flask import Flask, render_template, request, abort
 import json
+import os
 
 
 app = Flask(__name__, static_url_path='/static')
 
-# Sets the number of audio track per page. 
-# You should not change that after having started annotating!
-NUM_SOUNDS_PER_PAGE = 5
 
-# Enter here the path to the file containing the path of the sound track you have to annotate.
-# e.g. 'static/track_paths.json'
-PATH_TO_FILE_WITH_SOUND_IDS = 'static/stratified_test_elements_fold_0.json'
-FOLDER_WITH_AUDIO_FILES = 'static/tracks/'
+# The number of audio track per page.
+# You should not change this after having started annotating!
+CONFIG_SOUNDS_PER_PAGE = os.getenv('SOUNDS_PER_PAGE', '5')
+CONFIG_CHUNK = os.getenv('CHUNK_NUMBER')
+CONFIG_ANNOTATION_TASKS = os.getenv('ANNOTATION_TASKS', 'mood,miscellaneous')
+
+# The location that annotations are written to
+ANNOTATION_FOLDER = 'annotations'
 
 # There are three different annotation tasks
-ANNOTATION_TASKS = [
+VALID_ANNOTATION_TASKS = {
     'genre',
     'mood',
     'miscellaneous'
-]
+}
+
+
+# Enter here the path to the file containing the path of the sound track you have to annotate.
+# e.g. 'static/track_paths.json'
+PATH_TO_FILE_WITH_SOUND_IDS = 'static/stratified_test_elements_fold_{}.json'.format(CONFIG_CHUNK)
+if not os.path.exists(PATH_TO_FILE_WITH_SOUND_IDS):
+    raise ValueError("No such data file with chunk {}".format(CONFIG_CHUNK))
+
+
+FOLDER_WITH_AUDIO_FILES = 'static/tracks/'
+
+
+ANNOTATION_TASKS = []
+for ann_task in CONFIG_ANNOTATION_TASKS.split(","):
+    if ann_task not in VALID_ANNOTATION_TASKS:
+        raise ValueError("{} is not a valid annotation task".format(ann_task))
+    ANNOTATION_TASKS.append(ann_task)
+
+try:
+    NUM_SOUNDS_PER_PAGE = int(CONFIG_SOUNDS_PER_PAGE)
+except ValueError:
+    raise ValueError("{} is not a valid number of sounds per page".format(CONFIG_SOUNDS_PER_PAGE))
 
 
 @app.route('/')
@@ -52,7 +76,10 @@ def annotator(annotation_task):
         for track_name, answers in data['answers'].items():
             print(track_name, answers)
             track_name_without_folder = track_name.replace('/', '-')
-            json.dump(answers, open('annotations/{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder), 'w'))
+
+            annotation_file = '{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder)
+            with open(os.path.join(ANNOTATION_FOLDER, annotation_file), 'w') as fp:
+                json.dump(answers, fp)
         return json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
     page = int(request.args.get('p', 1))
@@ -62,10 +89,10 @@ def annotator(annotation_task):
     # get a chunk of sound tracks according to the requested page number
     sound_tracks = all_sound_tracks[(page-1)*NUM_SOUNDS_PER_PAGE:page*NUM_SOUNDS_PER_PAGE]
 
-    return render_template("index.html", 
-                           folder_with_audio_files=FOLDER_WITH_AUDIO_FILES, 
-                           sound_tracks=sound_tracks, 
-                           page=page, 
+    return render_template("index.html",
+                           folder_with_audio_files=FOLDER_WITH_AUDIO_FILES,
+                           sound_tracks=sound_tracks,
+                           page=page,
                            annotation_task=annotation_task)
 
 
