@@ -37,7 +37,7 @@
           obj[key] = $(el).val();
           var track_name = $(el).parents('.track-container').attr('id');
 
-          if (answers[track_name]) 
+          if (answers[track_name])
             {
               answers[track_name].push(obj);
             } else {
@@ -53,14 +53,14 @@
           obj[key] = $(el).val();
           var track_name = $(el).parents('.track-container').attr('id');
 
-          if (answers[track_name]) 
+          if (answers[track_name])
             {
               answers[track_name].push(obj);
             } else {
               answers[track_name] = [obj];
             }
         });
-        
+
         return answers
       }
 
@@ -70,7 +70,7 @@
           answers: answers,
           page: '{{page}}'
         };
-        
+
         $.ajax({
             url: '{{ url_for('annotator', annotation_task=annotation_task) }}',
             type: 'post',
@@ -87,7 +87,7 @@
       $('#submit-button').click(function() {
         send_answers();
       });
-    
+
 
       // player stuff
       $(".waveform").each(function(){
@@ -126,7 +126,7 @@
 
 <body>
   <h1>Task: {{annotation_task}}</h1>
-  <h2>You are in page #{{page}}</h2>
+  <h2>You are on page #{{page}}</h2>
 
   <div id="sound-container">
 

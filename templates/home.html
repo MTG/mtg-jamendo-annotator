@@ -2,10 +2,10 @@
 <html>
 <body>
 <h1>MTG Jamendo Annotator</h1>
-<h2>Choose one of the task bellow</h2>
+<h2>Choose one of the tasks bellow</h2>
   {% for annotation_task in annotation_tasks %}
-    <form style="width:150px; height: 100px; display: inline" 
-          action="{{ url_for('annotator', annotation_task=annotation_task) }}" 
+    <form style="width:150px; height: 100px; display: inline"
+          action="{{ url_for('annotator', annotation_task=annotation_task) }}"
           method="get">
       <button>{{annotation_task}}</button>
     </form>
