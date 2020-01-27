@@ -35,14 +35,16 @@ and go to http://localhost:5000
 
 If you prefer to not use Docker, you can set up the application manually
 
-### Install dependencies
+### MAC OS and Linux
+
+#### Install dependencies
 
     virtualenv venv
     source venv/bin/activate
     pip install -r requirements.txt
 
 
-### Configure
+#### Configure
 
 Export environment variables for settings:
 
@@ -52,7 +54,7 @@ Export environment variables for settings:
 
 Copy your audio files to `static/tracks/`
 
-### Start server
+#### Start server
 Run 
 
     flask run
@@ -61,6 +63,37 @@ and go to: http://localhost:5000/
 
 Choose a task and start annotating!
 
+### Windows
+
+#### Install Anaconda and dependencies
+
+Install Anaconda, following the instructions in [here](https://docs.anaconda.com/anaconda/install/windows/)
+
+Open Anaconda prompt and run:
+
+    conda create --name mtg-jamendo
+    conda activate mtg-jamendo
+    conda install flask
+
+
+#### Configure
+
+Export environment variables for settings:
+
+    SET SOUNDS_PER_PAGE=10
+    SET ANNOTATION_TASKS=mood,miscellaneous
+    SET CHUNK_NUMBER=5
+
+Copy your audio files to `static/tracks/`
+
+#### Start server
+Run 
+
+    flask run
+
+and go to: http://localhost:5000/
+
+Choose a task and start annotating!
 
 ## License
 This application has been made available under the Apache-2.0 license.
