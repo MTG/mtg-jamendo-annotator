@@ -39,9 +39,9 @@
 
           if (answers[track_name])
             {
-              answers[track_name].push(obj);
+              answers[track_name] = Object.assign(answers[track_name], obj);
             } else {
-              answers[track_name] = [obj];
+              answers[track_name] = obj;
             }
         });
 
@@ -55,9 +55,9 @@
 
           if (answers[track_name])
             {
-              answers[track_name].push(obj);
+              answers[track_name] = Object.assign(answers[track_name], obj);
             } else {
-              answers[track_name] = [obj];
+              answers[track_name] = obj;
             }
         });
 
