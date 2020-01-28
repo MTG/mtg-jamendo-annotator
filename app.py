@@ -98,7 +98,7 @@ def annotator(annotation_task):
 
     # check completion
     annotation_files = [file for file in os.listdir('annotations') if file.endswith('.json')]
-    annotated_pages_set = set([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files])
+    annotated_pages_set = set([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files if annotation_file.startswith(annotation_task)])
     annotated_pages = sorted(list(annotated_pages_set))
 
     # set page automatically according to their completion
