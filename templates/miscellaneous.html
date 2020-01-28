@@ -1,28 +1,28 @@
 <form class="form" action="" id="form-{{sound_track}}">
   <div class="box">
-    <input type="radio" name="timbre" value="1" checked="1">Bright<br>
-    <input type="radio" name="timbre" value="0">Dark
+    <input type="radio" name="timbre" value="1" {{checked(sound_track, "timbre", "1", default="1")}}>Bright<br>
+    <input type="radio" name="timbre" value="0" {{checked(sound_track, "timbre", "0", default="1")}}>Dark
   </div>
 
   <div class="box">
-    <input type="radio" name="tonal_atonal" value="1" checked="1">Tonal<br>
-    <input type="radio" name="tonal_atonal" value="0">Atonal
+    <input type="radio" name="tonal_atonal" value="1" {{checked(sound_track, "tonal_atonal", "1", default="1")}}>Tonal<br>
+    <input type="radio" name="tonal_atonal" value="0" {{checked(sound_track, "tonal_atonal", "0", default="1")}}>Atonal
   </div>
 
   <div class="box">
-    <input type="radio" name="danceability" value="1" checked="1">Danceabl<br>
-    <input type="radio" name="danceability" value="0">Not dance
+    <input type="radio" name="danceability" value="1" {{checked(sound_track, "danceability", "1", default="1")}}>Danceabl<br>
+    <input type="radio" name="danceability" value="0" {{checked(sound_track, "danceability", "0", default="1")}}>Not dance
   </div>
 
   <div class="box">
-    <input type="radio" name="voice_instrumental" value="1" checked="1">Voice<br>
-    <input type="radio" name="voice_instrumental" value="0">Instrum
+    <input type="radio" name="voice_instrumental" value="1" {{checked(sound_track, "voice_instrumental", "1", default="1")}}>Voice<br>
+    <input type="radio" name="voice_instrumental" value="0" {{checked(sound_track, "voice_instrumental", "0", default="1")}}>Instrum
   </div>
 
   <div class="box">
-    <input type="radio" name="gender" value="2" checked="2">Instrum<br>
-    <input type="radio" name="gender" value="1">Female
-    <input type="radio" name="gender" value="0">Male
+    <input type="radio" name="gender" value="2" {{checked(sound_track, "gender", "2", default="2")}}>Instrum<br>
+    <input type="radio" name="gender" value="1" {{checked(sound_track, "gender", "1", default="2")}}>Female<br>
+    <input type="radio" name="gender" value="0" {{checked(sound_track, "gender", "0", default="2")}}>Male
   </div>
 
 </form>

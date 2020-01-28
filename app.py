@@ -101,7 +101,7 @@ def annotator(annotation_task):
     annotated_pages_set = set([int(annotation_file.split('-')[-2]) for annotation_file in annotation_files])
     annotated_pages = sorted(list(annotated_pages_set))
 
-    # set page automaticaly according to their completion
+    # set page automatically according to their completion
     if not page:
         if annotation_files:
             redirect_page = find_missing_integer(annotated_pages)
@@ -120,12 +120,26 @@ def annotator(annotation_task):
     # get a chunk of sound tracks according to the requested page number
     sound_tracks = all_sound_tracks[(page-1)*NUM_SOUNDS_PER_PAGE:page*NUM_SOUNDS_PER_PAGE]
 
+    # Load annotations for any sounds already annotated on this page
+    page_annotations = {}
+    for tr in sound_tracks:
+        print(tr)
+        track_name_without_folder = tr.replace('/', '_')
+        annotation_file = '{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder)
+        full_filename = os.path.join(ANNOTATION_FOLDER, annotation_file)
+        if os.path.exists(full_filename):
+            with open(full_filename, 'r') as fp:
+                data = json.load(fp)
+                page_annotations[tr] = data
+        print(annotation_file)
+
     return render_template("index.html",
                            folder_with_audio_files=FOLDER_WITH_AUDIO_FILES,
                            sound_tracks=sound_tracks,
                            page=page,
                            annotation_task=annotation_task,
-                           page_already_annotated=page_already_annotated)
+                           page_already_annotated=page_already_annotated,
+                           page_annotations=page_annotations)
 
 
 if __name__ == '__main__':

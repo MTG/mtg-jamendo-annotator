@@ -1,3 +1,6 @@
+{% macro checked(sound, feature, val, default) -%}
+{% if page_annotations.get(sound, {}).get(feature) == val or (sound not in page_annotations and default == val) %}checked="checked"{% endif %}
+{%- endmacro %}
 <!DOCTYPE html>
 <html>
 
