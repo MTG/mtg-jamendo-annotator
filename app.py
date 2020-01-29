@@ -85,7 +85,6 @@ def annotator(annotation_task):
         data = request.get_json()
         page = data['page']
         for track_name, answers in data['answers'].items():
-            print(track_name, answers)
             track_name_without_folder = track_name.replace('/', '_')
 
             annotation_file = '{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder)
@@ -123,7 +122,6 @@ def annotator(annotation_task):
     # Load annotations for any sounds already annotated on this page
     page_annotations = {}
     for tr in sound_tracks:
-        print(tr)
         track_name_without_folder = tr.replace('/', '_')
         annotation_file = '{}-page-{}-{}.json'.format(annotation_task, page, track_name_without_folder)
         full_filename = os.path.join(ANNOTATION_FOLDER, annotation_file)
@@ -131,7 +129,6 @@ def annotator(annotation_task):
             with open(full_filename, 'r') as fp:
                 data = json.load(fp)
                 page_annotations[tr] = data
-        print(annotation_file)
 
     return render_template("index.html",
                            folder_with_audio_files=FOLDER_WITH_AUDIO_FILES,
