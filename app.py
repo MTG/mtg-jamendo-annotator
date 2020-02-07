@@ -102,7 +102,7 @@ def annotator(annotation_task):
 
     # set page automatically according to their completion
     if not page:
-        if annotation_files:
+        if annotated_pages:
             redirect_page = find_missing_integer(annotated_pages)
         else:
             redirect_page = 1
