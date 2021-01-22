@@ -12,7 +12,7 @@ In the section `environment`, set `CHUNK_NUMBER` to the chunk that you are editi
 
     environment:
       - SOUNDS_PER_PAGE=10
-      - ANNOTATION_TASKS=mood,miscellaneous
+      - ANNOTATION_TASKS=mood,miscellaneous,mood-miscellaneous,all
       - CHUNK_NUMBER=5
       
 In the section `volumes`, add the full path to the location of your audio 
@@ -49,7 +49,7 @@ If you prefer to not use Docker, you can set up the application manually
 Export environment variables for settings:
 
     export SOUNDS_PER_PAGE=10
-    export ANNOTATION_TASKS=mood,miscellaneous
+    export ANNOTATION_TASKS=mood,miscellaneous,mood-miscellaneous,all
     export CHUNK_NUMBER=5
 
 Copy your audio files to `static/tracks/`
@@ -81,7 +81,7 @@ Open Anaconda prompt and run:
 Export environment variables for settings:
 
     SET SOUNDS_PER_PAGE=10
-    SET ANNOTATION_TASKS=mood,miscellaneous
+    SET ANNOTATION_TASKS=mood,miscellaneous,mood-miscellaneous,all
     SET CHUNK_NUMBER=5
 
 Copy your audio files to `static/tracks/`

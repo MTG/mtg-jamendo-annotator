@@ -24,7 +24,7 @@ app = Flask(__name__, static_url_path='/static')
 # You should not change this after having started annotating!
 CONFIG_SOUNDS_PER_PAGE = os.getenv('SOUNDS_PER_PAGE', '5')
 CONFIG_CHUNK = os.getenv('CHUNK_NUMBER')
-CONFIG_ANNOTATION_TASKS = os.getenv('ANNOTATION_TASKS', 'mood,miscellaneous')
+CONFIG_ANNOTATION_TASKS = os.getenv('ANNOTATION_TASKS', 'mood,miscellaneous,mood-miscellaneous,all')
 
 # The location that annotations are written to
 ANNOTATION_FOLDER = 'annotations'
@@ -33,7 +33,9 @@ ANNOTATION_FOLDER = 'annotations'
 VALID_ANNOTATION_TASKS = {
     'genre',
     'mood',
-    'miscellaneous'
+    'miscellaneous',
+    'mood-miscellaneous',
+    'all',
 }
 
 

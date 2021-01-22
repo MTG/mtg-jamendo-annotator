@@ -6,7 +6,7 @@ services:
     command: flask run --host=0.0.0.0
     environment:
       - SOUNDS_PER_PAGE=10
-      - ANNOTATION_TASKS=mood,miscellaneous
+      - ANNOTATION_TASKS=mood,miscellaneous,mood-miscellaneous,all
       - CHUNK_NUMBER=0
     ports:
       - "5000:5000"

@@ -1,0 +1,121 @@
+<form class="form" action="" id="form-{{sound_track}}">
+  <!-- mood tasks -->
+  <div class="box">
+    <input type="radio" name="mood_acoustic" value="1" {{checked(sound_track, "mood_acoustic", "1", default="1")}}>Acoustic<br>
+    <input type="radio" name="mood_acoustic" value="0" {{checked(sound_track, "mood_acoustic", "0", default="1")}}>Not acoustic
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_electronic" value="1" {{checked(sound_track, "mood_electronic", "1", default="1")}}>Electronic<br>
+    <input type="radio" name="mood_electronic" value="0" {{checked(sound_track, "mood_electronic", "0", default="1")}}>Not electronic
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_aggressive" value="1" {{checked(sound_track, "mood_aggressive", "1", default="1")}}">Aggresive<br>
+    <input type="radio" name="mood_aggressive" value="0" {{checked(sound_track, "mood_aggressive", "0", default="1")}}>Not aggresive
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_relaxed" value="1" {{checked(sound_track, "mood_relaxed", "1", default="1")}}>Relaxed<br>
+    <input type="radio" name="mood_relaxed" value="0" {{checked(sound_track, "mood_relaxed", "0", default="1")}}>Not relaxed
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_happy" value="1" {{checked(sound_track, "mood_happy", "1", default="1")}}>Happy<br>
+    <input type="radio" name="mood_happy" value="0" {{checked(sound_track, "mood_happy", "0", default="1")}}>Not happy
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_sad" value="1" {{checked(sound_track, "mood_sad", "1", default="1")}}>Sad<br>
+    <input type="radio" name="mood_sad" value="0" {{checked(sound_track, "mood_sad", "0", default="1")}}>Not sad
+  </div>
+
+  <div class="box">
+    <input type="radio" name="mood_party" value="1" {{checked(sound_track, "mood_party", "1", default="1")}}>Party<br>
+    <input type="radio" name="mood_party" value="0" {{checked(sound_track, "mood_party", "0", default="1")}}>Not party
+  </div>
+  
+  <!-- miscellaneous tasks -->
+  <div class="box">
+    <input type="radio" name="timbre" value="1" {{checked(sound_track, "timbre", "1", default="1")}}>Bright<br>
+    <input type="radio" name="timbre" value="0" {{checked(sound_track, "timbre", "0", default="1")}}>Dark
+  </div>
+
+  <div class="box">
+    <input type="radio" name="tonal_atonal" value="1" {{checked(sound_track, "tonal_atonal", "1", default="1")}}>Tonal<br>
+    <input type="radio" name="tonal_atonal" value="0" {{checked(sound_track, "tonal_atonal", "0", default="1")}}>Atonal
+  </div>
+
+  <div class="box">
+    <input type="radio" name="danceability" value="1" {{checked(sound_track, "danceability", "1", default="1")}}>Danceabl<br>
+    <input type="radio" name="danceability" value="0" {{checked(sound_track, "danceability", "0", default="1")}}>Not dance
+  </div>
+
+  <div class="box">
+    <input type="radio" name="voice_instrumental" value="1" {{checked(sound_track, "voice_instrumental", "1", default="1")}}>Voice<br>
+    <input type="radio" name="voice_instrumental" value="0" {{checked(sound_track, "voice_instrumental", "0", default="1")}}>Instrum
+  </div>
+
+  <div class="box">
+    <input type="radio" name="gender" value="2" {{checked(sound_track, "gender", "2", default="2")}}>Instrum<br>
+    <input type="radio" name="gender" value="1" {{checked(sound_track, "gender", "1", default="2")}}>Female<br>
+    <input type="radio" name="gender" value="0" {{checked(sound_track, "gender", "0", default="2")}}>Male
+  </div>
+</form>
+
+<!-- miscellaneous tasks -->
+<span class="box" taxonomy="genre_rosamerica">
+  <select  value="unmatched">
+    <option value="unmatched">unmatched</option>
+    <option value="cla">classic</option>
+    <option value="dan">dance</option>
+    <option value="hip">hip hop</option>
+    <option value="jaz">jazz</option>
+    <option value="pop">pop</option>
+    <option value="rhy">rnb</option>
+    <option value="roc">rock</option>
+    <option value="spe">speech</option>
+  </select>
+</span>
+
+<span class="box" taxonomy="genre_tzanetakis">
+  <select value="unmatched">
+    <option value="unmatched">unmatched</option>
+    <option value="blu">blues</option>
+    <option value="cla">classic</option>
+    <option value="cou">country</option>
+    <option value="dis">disco</option>
+    <option value="hip">hip hop</option>
+    <option value="jaz">jazz</option>
+    <option value="met">metal</option>
+    <option value="pop">pop</option>
+    <option value="reg">reggae</option>
+    <option value="roc">rock</option>
+  </select>
+</span>
+
+<span class="box" taxonomy="genre_dortmund">
+  <select>
+    <option value="unmatched">unmatched</option>
+    <option value="alternative">alternative</option>
+    <option value="blues">blues</option>
+    <option value="electronic">electronic</option>
+    <option value="folkcountry">folkcountry</option>
+    <option value="funksoulrnb">funksoulrnb</option>
+    <option value="jazz">jazz</option>
+    <option value="pop">pop</option>
+    <option value="raphiphop">raphiphop</option>
+    <option value="rock">rock</option>
+  </select>
+</span>
+
+<span class="box" taxonomy="genre_electronic">
+  <select>
+    <option value="unmatched">unmatched</option>
+    <option value="ambient">ambient</option>
+    <option value="dnb">dnb</option>
+    <option value="house">house</option>
+    <option value="techno">techno</option>
+    <option value="trance">trance</option>
+  </select>
+</span>
