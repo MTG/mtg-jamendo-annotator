@@ -1,6 +1,11 @@
 {% macro checked(sound, feature, val, default) -%}
 {% if page_annotations.get(sound, {}).get(feature) == val or (sound not in page_annotations and default == val) %}checked="checked"{% endif %}
 {%- endmacro %}
+
+{% from "genre.html" import genre_form with context %}
+{% from "mood.html" import mood_form with context %}
+{% from "miscellaneous.html" import miscellaneous_form with context %}
+
 <!DOCTYPE html>
 <html>
 

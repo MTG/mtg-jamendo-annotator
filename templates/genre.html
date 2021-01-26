@@ -1,55 +1,60 @@
+{% macro genre_form() -%}
 <span class="box" taxonomy="genre_rosamerica">
-  <select  value="unmatched">
-    <option value="unmatched">unmatched</option>
-    <option value="cla">classic</option>
-    <option value="dan">dance</option>
-    <option value="hip">hip hop</option>
-    <option value="jaz">jazz</option>
-    <option value="pop">pop</option>
-    <option value="rhy">rnb</option>
-    <option value="roc">rock</option>
-    <option value="spe">speech</option>
-  </select>
-</span>
+    <select  value="unmatched">
+      <option value="unmatched">unmatched</option>
+      <option value="cla">classic</option>
+      <option value="dan">dance</option>
+      <option value="hip">hip hop</option>
+      <option value="jaz">jazz</option>
+      <option value="pop">pop</option>
+      <option value="rhy">rnb</option>
+      <option value="roc">rock</option>
+      <option value="spe">speech</option>
+    </select>
+  </span>
+  
+  <span class="box" taxonomy="genre_tzanetakis">
+    <select value="unmatched">
+      <option value="unmatched">unmatched</option>
+      <option value="blu">blues</option>
+      <option value="cla">classic</option>
+      <option value="cou">country</option>
+      <option value="dis">disco</option>
+      <option value="hip">hip hop</option>
+      <option value="jaz">jazz</option>
+      <option value="met">metal</option>
+      <option value="pop">pop</option>
+      <option value="reg">reggae</option>
+      <option value="roc">rock</option>
+    </select>
+  </span>
+  
+  <span class="box" taxonomy="genre_dortmund">
+    <select>
+      <option value="unmatched">unmatched</option>
+      <option value="alternative">alternative</option>
+      <option value="blues">blues</option>
+      <option value="electronic">electronic</option>
+      <option value="folkcountry">folkcountry</option>
+      <option value="funksoulrnb">funksoulrnb</option>
+      <option value="jazz">jazz</option>
+      <option value="pop">pop</option>
+      <option value="raphiphop">raphiphop</option>
+      <option value="rock">rock</option>
+    </select>
+  </span>
+  
+  <span class="box" taxonomy="genre_electronic">
+    <select>
+      <option value="unmatched">unmatched</option>
+      <option value="ambient">ambient</option>
+      <option value="dnb">dnb</option>
+      <option value="house">house</option>
+      <option value="techno">techno</option>
+      <option value="trance">trance</option>
+    </select>
+  </span>
+{%- endmacro %}
 
-<span class="box" taxonomy="genre_tzanetakis">
-  <select value="unmatched">
-    <option value="unmatched">unmatched</option>
-    <option value="blu">blues</option>
-    <option value="cla">classic</option>
-    <option value="cou">country</option>
-    <option value="dis">disco</option>
-    <option value="hip">hip hop</option>
-    <option value="jaz">jazz</option>
-    <option value="met">metal</option>
-    <option value="pop">pop</option>
-    <option value="reg">reggae</option>
-    <option value="roc">rock</option>
-  </select>
-</span>
-
-<span class="box" taxonomy="genre_dortmund">
-  <select>
-    <option value="unmatched">unmatched</option>
-    <option value="alternative">alternative</option>
-    <option value="blues">blues</option>
-    <option value="electronic">electronic</option>
-    <option value="folkcountry">folkcountry</option>
-    <option value="funksoulrnb">funksoulrnb</option>
-    <option value="jazz">jazz</option>
-    <option value="pop">pop</option>
-    <option value="raphiphop">raphiphop</option>
-    <option value="rock">rock</option>
-  </select>
-</span>
-
-<span class="box" taxonomy="genre_electronic">
-  <select>
-    <option value="unmatched">unmatched</option>
-    <option value="ambient">ambient</option>
-    <option value="dnb">dnb</option>
-    <option value="house">house</option>
-    <option value="techno">techno</option>
-    <option value="trance">trance</option>
-  </select>
-</span>
+<!-- genre tasks -->
+{{genre_form()}}

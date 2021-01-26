@@ -1,3 +1,4 @@
+{% macro mood_form() -%}
 <form class="form" action="" id="form-{{sound_track}}">
   <div class="box">
     <input type="radio" name="mood_acoustic" value="1" {{checked(sound_track, "mood_acoustic", "1", default="1")}}>Acoustic<br>
@@ -34,3 +35,7 @@
     <input type="radio" name="mood_party" value="0" {{checked(sound_track, "mood_party", "0", default="1")}}>Not party
   </div>
 </form>
+{%- endmacro %}
+
+<!-- mood tasks -->
+{{mood_form()}}
