@@ -1,5 +1,5 @@
-{% macro miscellaneous_form() -%}
-<form class="form" action="" id="form-{{sound_track}}">
+{% macro miscellaneous_form(sound_track) -%}
+<form class="form" action="" id="form-misc-{{sound_track}}">
   <div class="box">
     <input type="radio" name="timbre" value="1" {{checked(sound_track, "timbre", "1", default="1")}}>Bright<br>
     <input type="radio" name="timbre" value="0" {{checked(sound_track, "timbre", "0", default="1")}}>Dark
@@ -30,4 +30,4 @@
 {%- endmacro %}
 
 <!-- miscellaneous tasks -->
-{{miscellaneous_form()}}
+{{miscellaneous_form(sound_track)}}

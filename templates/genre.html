@@ -1,4 +1,4 @@
-{% macro genre_form() -%}
+{% macro genre_form(sound_track) -%}
 <span class="box" taxonomy="genre_rosamerica">
   <select value="unmatched">
     <option value="unmatched">unmatched</option>
@@ -57,4 +57,4 @@
 {%- endmacro %}
 
 <!-- genre tasks -->
-{{genre_form()}}
+{{genre_form(sound_track)}}
